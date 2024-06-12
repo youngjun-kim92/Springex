@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+    <!-- 해당 패키지를 스캔해서 스프링의 에너테이션들을 인식 -->
+    <!-- sample에 있는 @Service, @Repository 등이 써져있는 모든 것을 bean으로 인식해라 라는 뜻 -->
+    <context:component-scan base-package="com.springex.sample"/>
+    <!-- 데이터베이스 연결 -->
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mariadb://localhost:3306/webdb"></property>
+        <property name="username" value="webuser"></property>
+        <property name="password" value="webuser"></property>
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="cachePrepStmts">true</prop>
+                <prop key="prepStmtCacheSize">250</prop>
+                <prop key="prepStmtCacheSqlLimit">2048</prop>
+            </props>
+        </property>
+    </bean>
+    <!-- hikariConfig로 연결한 데이터베이스를 dataSource라는 이름의 빈으로 설정 -->
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+          destroy-method="close">
+        <constructor-arg ref="hikariConfig" />
+    </bean>
+    <!-- MyBatis 설정 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- xml 매퍼 파일의 위치. classpath 접두어를 이용해서 인식되는 경로이고 mappers 폴더 밑에 폴더가 있어도 관계없도록 '**'와 '*.xml'을 지정 -->
+        <property name="mapperLocations" value="classpath:/mappers/**/*.xml"></property>
+    </bean>
+    <mybatis:scan base-package="com.springex.mapper"></mybatis:scan>
+</beans>
