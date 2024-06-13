@@ -4,9 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
-    <!-- 해당 패키지를 스캔해서 스프링의 에너테이션들을 인식 -->
-    <!-- sample에 있는 @Service, @Repository 등이 써져있는 모든 것을 bean으로 인식해라 라는 뜻 -->
-    <context:component-scan base-package="com.springex.sample"/>
+
     <!-- 데이터베이스 연결 -->
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
@@ -33,4 +31,7 @@
         <property name="mapperLocations" value="classpath:/mappers/**/*.xml"></property>
     </bean>
     <mybatis:scan base-package="com.springex.mapper"></mybatis:scan>
+    <!-- 등록한 bean들 인식하게 끔 한다. -->
+    <context:component-scan base-package="com.springex.config"/>
+    <context:component-scan base-package="com.springex.service"/>
 </beans>

@@ -1,32 +1,23 @@
-package com.springex.dto;
-
+package com.springex.domain;
 import java.time.LocalDate;
 
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Getter
 @ToString
-@Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TodoDTO {
+@Builder
+public class TodoVO {
 
     private Long tno;
-
-    @NotEmpty
     private String title;
-
-    @Future
     private LocalDate dueDate;
-
+    private String writer;
     private boolean finished;
 
-    @NotEmpty
-    private String writer;   //새로 추가
 }
