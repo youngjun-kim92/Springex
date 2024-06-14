@@ -105,17 +105,17 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
     document.querySelector(".btn-primary").addEventListener("click", function(e){
-        self.location = "/todo/modify?tno="+${dto.tno}
+        self.location = `/todo/modify?tno=${dto.tno}&${pageRequestDTO.link}`
     },false)
 
 
     //목록 페이지로 이동하는 이벤트 처리
     document.querySelector(".btn-secondary").addEventListener("click", function(e){
 
-        e.preventDefault()  // 기본동작 취소
-        e.stopPropagation()  // 이벤트 흐름 방지
-
-        self.location = "/todo/list";  // self는 현재창의 location은 url을 나타냄. 즉, 현재창의 주소
+        e.preventDefault()// 기본동작 취소
+        e.stopPropagation()// 이벤트 흐름 방지
+// self는 현재창의 location은 url을 나타냄. 즉, 현재창의 주소
+        self.location = "/todo/list?${pageRequestDTO.link}";
     },false)
 </script>
 </body>

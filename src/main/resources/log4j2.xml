@@ -10,15 +10,15 @@
     </Appenders>
 
     <loggers>
-        <logger name="springex.springframework" level="INFO" additivity="false">
+        <logger name="com.springex.springframework" level="INFO" additivity="false">
             <appender-ref ref="console" />
         </logger>
 
-        <logger name="springex" level="INFO" additivity="false">
+        <logger name="com.springex" level="INFO" additivity="false">
             <appender-ref ref="console" />
         </logger>
 
-        <logger name="springex.mapper" level="TRACE" additivity="false">
+        <logger name="com.springex.mapper" level="TRACE" additivity="false">
             <appender-ref ref="console" />
         </logger>
 

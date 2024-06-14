@@ -26,7 +26,6 @@ public class TodoDTO {
     private LocalDate dueDate;
 
     private boolean finished;
-
     @NotEmpty
-    private String writer;   //새로 추가
+    private String writer;	//새로 추가
 }

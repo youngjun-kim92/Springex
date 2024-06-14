@@ -2,6 +2,8 @@ package springex.service;
 
 import java.time.LocalDate;
 
+import com.springex.dto.PageRequestDTO;
+import com.springex.dto.PageResponseDTO;
 import com.springex.dto.TodoDTO;
 import com.springex.service.TodoService;
 import org.junit.jupiter.api.Test;
@@ -30,5 +32,18 @@ public class TodoServiceTests {
                 .build();
 
         todoService.register(todoDTO);
+    }
+
+    @Test
+    public void testPaging() {
+
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(1).size(10).build();
+
+        PageResponseDTO<TodoDTO> responseDTO = todoService.getList(pageRequestDTO);
+
+        log.info(responseDTO);
+
+        responseDTO.getDtoList().stream().forEach(todoDTO -> log.info(todoDTO));
+
     }
 }

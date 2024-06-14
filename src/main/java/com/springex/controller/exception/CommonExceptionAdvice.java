@@ -14,9 +14,7 @@ import java.util.Arrays;
 @Log4j2
 public class CommonExceptionAdvice {
 
-    // @ResponseBody : 응답의 대한 결과를 body 태그에 그대로 표출하겠다는 의미, 문자열, JSON타입을 그대로 브라우저에 전송하는 방식
     @ResponseBody
-    // @ExceptionHandler : 어떤 exception인지 인지하는 에너테이션
     @ExceptionHandler(NumberFormatException.class)
     public String exceptNumber(NumberFormatException numberFormatException) {
 
@@ -25,7 +23,6 @@ public class CommonExceptionAdvice {
 
         return "NUMBER FORMAT EXCEPTION";
     }
-
     @ResponseBody
     @ExceptionHandler(Exception.class)
     public String exceptCommon(Exception exception) {
@@ -44,14 +41,10 @@ public class CommonExceptionAdvice {
 
         return buffer.toString();
     }
-
-    // 페이지를 찾을 수 없으면
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String notFound() {
+    public String notFound(){
 
-        // @ResponseBody가 없으므로 jsp파일로 가라는 뜻
         return "custom404";
     }
-
 }

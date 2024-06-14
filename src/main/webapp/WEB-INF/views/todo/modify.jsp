@@ -48,6 +48,8 @@
                     </div>
                     <div class="card-body">
                         <form action="/todo/modify" method="post">
+                            <input type="hidden" name="page" value="${pageRequestDTO.page}">
+                            <input type="hidden" name="size" value="${pageRequestDTO.size}">
                         <div class="input-group mb-3">
                             <span class="input-group-text">TNO</span>
                             <input type="text" name="tno" class="form-control"
@@ -56,13 +58,13 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text">Title</span>
                             <input type="text" name="title" class="form-control"
-                                   value=<c:out value="${dto.title}"></c:out>>
+                                   value=<c:out value="${dto.title}"></c:out> >
                         </div>
 
                         <div class="input-group mb-3">
                             <span class="input-group-text">DueDate</span>
                             <input type="date" name="dueDate" class="form-control"
-                                   value=<c:out value="${dto.dueDate}"></c:out>>
+                                   value=<c:out value="${dto.dueDate}"></c:out> >
 
                         </div>
 
@@ -77,7 +79,7 @@
                             <label class="form-check-label" >
                                 Finished &nbsp;
                             </label>
-                            <input class="form-check-input" type="checkbox" name="finished" ${dto.finished?"checked":""}>
+                            <input class="form-check-input" type="checkbox" name="finished" ${dto.finished?"checked":""} >
                         </div>
 
                         <div class="my-4">
@@ -127,12 +129,11 @@
     //목록 페이지로 이동하는 이벤트 처리
     document.querySelector(".btn-secondary").addEventListener("click", function(e){
 
-        e.preventDefault()  // 기본동작 취소
-        e.stopPropagation()  // 이벤트 흐름 방지
-
-        self.location = "/todo/list";  // self는 현재창의 location은 url을 나타냄. 즉, 현재창의 주소
+        e.preventDefault()// 기본동작 취소
+        e.stopPropagation()// 이벤트 흐름 방지
+// self는 현재창의 location은 url을 나타냄. 즉, 현재창의 주소
+        self.location = "/todo/list?${pageRequestDTO.link}";
     },false)
-
     // remove 버튼 처리
     const formObj = document.querySelector("form")
 
